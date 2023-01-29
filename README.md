@@ -12,7 +12,7 @@ Installation
 
 Clone the repository:
 
-git clone https://github.com/AIVAN22/login-register-system.git
+git clone https://github.com/AIVAN22/Register_system.git
 
 Install the required dependencies:
 
