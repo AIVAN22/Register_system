@@ -1,6 +1,8 @@
 import tkinter
 from tkinter import messagebox
 from Register import reg
+import mysql.connector
+import os
 
 
 root = tkinter.Tk()
@@ -8,12 +10,29 @@ root.geometry("280x340")
 root.title("System")
 root.config(background="#088a88")
 
+con = mysql.connector.connect(
+    host=os.getenv("host"),
+    user=os.getenv("user"),
+    password=os.getenv("password"),
+    database=os.getenv("database"),
+)
+cursor = con.cursor()
+con.commit()
+
+cursor.execute("SELECT username, password FROM users")
+users = cursor.fetchall()
+users_dic = {}
+for user in users:
+    users_dic[user[0]] = user[1]
+
+print(users_dic)
+
 
 def login():
-    username = "asdasd"
-    password = "1234"
-    if entry_user.get() == username and entry_pass.get() == password:
-        messagebox.showinfo(title="Login Success", message="You are logged in")
+    for username, password in users_dic.items():
+        if entry_user.get() in username and entry_pass.get() == password:
+            messagebox.showinfo(title="Login Success", message="You are logged in")
+            break
     else:
         messagebox.showerror(title="Login Error", message="Invalid info")
 

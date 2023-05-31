@@ -1,6 +1,7 @@
 import tkinter
 import mysql.connector
 from tkinter import *
+import os
 
 
 def reg():
@@ -18,10 +19,10 @@ def reg():
     def apply():
         if entry_pass.get() == entry_cof_pass.get():
             cnx = mysql.connector.connect(
-                host="localhost",
-                user="root",
-                password=" ",
-                database="register_form",
+                host=os.getenv("host"),
+                user=os.getenv("user"),
+                password=os.getenv("password"),
+                database=os.getenv("database"),
             )
 
             cursor = cnx.cursor()
